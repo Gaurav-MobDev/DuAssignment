@@ -1166,6 +1166,8 @@ PODS:
     - React-logger (= 0.74.4)
     - React-perflogger (= 0.74.4)
     - React-utils (= 0.74.4)
+  - RNLocalize (3.2.1):
+    - React-Core
   - SocketRocket (0.7.0)
   - Yoga (0.0.0)
 
@@ -1226,6 +1228,7 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNLocalize (from `../node_modules/react-native-localize`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -1342,6 +1345,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNLocalize:
+    :path: "../node_modules/react-native-localize"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -1353,7 +1358,7 @@ SPEC CHECKSUMS:
   glog: fdfdfe5479092de0c4bdbebedd9056951f092c4f
   hermes-engine: 6312f669c895e05f0f6029554061593711770ea6
   RCT-Folly: 02617c592a293bd6d418e0a88ff4ee1f88329b47
-  RCTDeprecation: c98ebba2057b30ca6462ce430009074913828edc
+  RCTDeprecation: d83da85890d5bb18efd2809a733865c1c5c11487
   RCTRequired: e109419eacfb10fbb79a3ecb57ebcad198593d8a
   RCTTypeSafety: 9d0307c2738867b9850f096914a15294124b2439
   React: 40ad59420ae403a6d2d49f2787f0bfaabaed4fdf
@@ -1400,9 +1405,10 @@ SPEC CHECKSUMS:
   React-runtimescheduler: 3f312d33f475467a59864e0c5ab8708461387d1c
   React-utils: e8b0eac797c81c574b24f6515fec4015599b643c
   ReactCommon: eebffb37a90138c6db6eb8b2d952e7e5c6bc083c
+  RNLocalize: 4f22418187ecd5ca693231093ff1d912d1b3c9bc
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   Yoga: 6259f968a4fdf516d76a4432dead624d71aa0fb1
 
 PODFILE CHECKSUM: 9156acc6386a3b4c8fe47a83ce1b646936f0a065
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.15.2
