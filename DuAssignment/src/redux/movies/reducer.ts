@@ -4,15 +4,18 @@ import {
   MoviesAction,
   RESEST_STORE,
   MoviesType,
+  FETCH_MOVIES,
 } from './types';
 
 const initialState = {
   error: '',
+  loading: false,
   movies: [],
 };
 export type MoviesState = {
   movies: MoviesType[];
   error: string;
+  loading: boolean;
 };
 
 export default function moviesReducer(
@@ -20,17 +23,24 @@ export default function moviesReducer(
   action: MoviesAction,
 ) {
   switch (action.type) {
+    case FETCH_MOVIES:
+      return {
+        ...state,
+        loading: true,
+      };
     case FETCH_MOVIES_SUCCESS:
       return {
         ...state,
         movies: action.payload,
         error: '',
+        loading: false,
       };
     case FETCH_MOVIES_FAILURE:
       return {
         ...state,
         movies: [],
         error: action.payload,
+        loading: false,
       };
     case RESEST_STORE:
       return initialState;

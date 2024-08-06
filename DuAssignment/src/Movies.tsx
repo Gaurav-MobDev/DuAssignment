@@ -19,15 +19,14 @@ import {i18n} from './localization';
 
 function Movies() {
   let dispatch = useAppDispatch();
-  let {movies, error} = useAppSelector((state: RootState) => state.movies);
+  let {movies, error, loading} = useAppSelector(
+    (state: RootState) => state.movies,
+  );
 
   const [moviesList, setMoviesList] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
     dispatch(fetchMovies());
-    setLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -65,7 +64,7 @@ function Movies() {
   if (loading) {
     return (
       <SafeAreaView style={styles.container}>
-        <ActivityIndicator size={'large'} />
+        <ActivityIndicator size={'large'} color={'#000'} />
       </SafeAreaView>
     );
   }
