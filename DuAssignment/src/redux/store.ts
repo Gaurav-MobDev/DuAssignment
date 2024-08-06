@@ -1,23 +1,49 @@
 import {configureStore} from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  PAUSE,
+  REHYDRATE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 import rootSaga from './sagas';
 import {rootReducer} from './reducers';
+import createSensitiveStorage from 'redux-persist-sensitive-storage';
+
+export const sensitiveStorageKeys = {
+  keychainService: 'du-njk13k1k3jk3j1nkj3k3kj1',
+  sharedPreferencesName: 'du-fwjknkjfnwfkjwn32kn2kjn2k3',
+};
+export const sensitiveStorage = createSensitiveStorage(sensitiveStorageKeys);
+const persistConfig = {
+  key: 'root',
+  storage: sensitiveStorage,
+  whitelist: ['login', 'movies'],
+};
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(sagaMiddleware),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REGISTER, REHYDRATE, PAUSE, PURGE, PERSIST],
+      },
+    }).concat(sagaMiddleware),
 });
 
 sagaMiddleware.run(rootSaga);
 
-// Get the type of our store variable
 export type AppStore = typeof store;
-// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<AppStore['getState']>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = AppStore['dispatch'];
 
-export {store};
+const persistor = persistStore(store);
+
+export {store, persistor};

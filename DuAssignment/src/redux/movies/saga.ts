@@ -1,24 +1,28 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
-import {FETCH_MOVIES_TYPE, FetchMoviesRequestAction} from './types';
+import {FETCH_MOVIES} from './types';
 import {fetchMoviesFailure, fetchMoviesSuccess} from './actions';
+import {MOVIES_URL} from '../../utils/Endpoints';
 
-function* fetchMovies(
-  action: FetchMoviesRequestAction,
-): Generator<any, void, any> {
+function* fetchMovies(): Generator<any, void, any> {
   try {
-    const {
-      payload: {userId},
-    } = action;
-    const response = yield call(fetch, `https://api.example.com/data${userId}`); // Replace with your API
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNmI1MGM3OWEyYWEzYTgwY2Q4OTM2NWRiM2JhODUxNSIsIm5iZiI6MTcyMjkzMzIxOS44Nzc2NjEsInN1YiI6IjY2YjFkZTMyYzJkOGUwZWRhYTk5YTg0YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Vb9ed_m6NkvkzCmZte1aTkTMQZRytPfr6Nj4nt68r-0',
+      },
+    };
+    const response = yield call(fetch, `${MOVIES_URL}`, options);
     const data = yield response.json();
-    yield put(fetchMoviesSuccess(data));
+    yield put(fetchMoviesSuccess(data?.results));
   } catch (e) {
     yield put(fetchMoviesFailure(e as any));
   }
 }
 
 function* moviesSaga() {
-  yield takeLatest(FETCH_MOVIES_TYPE, fetchMovies);
+  yield takeLatest(FETCH_MOVIES, fetchMovies);
 }
 
 export {moviesSaga};

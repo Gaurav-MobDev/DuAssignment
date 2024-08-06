@@ -2,5 +2,10 @@
     "language": "English",
     "loginScreen": "Login Screen",
     "enterUserName": "Enter Username",
-    "enterPassword": "Enter Password"
+    "enterPassword": "Enter Password",
+    "emailError": "Please enter a valid email",
+    "passwordError":
+    "Password should have 8-15 characters(Alpha number with 1 capital and 1 special character",
+     "movies": "MOVIES",
+     "logout": "LOGOUT"
 }

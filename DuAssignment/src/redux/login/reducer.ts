@@ -1,7 +1,8 @@
-import {SAVE_USER_DETAILS_TYPE} from './types';
+import {SAVE_USER_DETAILS_TYPE, RESEST_STORE, SET_LANGUGE} from './types';
 
 const initialState = {
   isLoggedIn: false,
+  language: 'en',
 };
 
 type LoginActionType = {
@@ -11,6 +12,7 @@ type LoginActionType = {
 
 type LoginPayloadType = {
   isLoggedIn: boolean;
+  language: string;
 };
 export default function loginReducer(
   state = initialState,
@@ -21,6 +23,13 @@ export default function loginReducer(
       return {
         ...state,
         isLoggedIn: action.payload.isLoggedIn,
+      };
+    case RESEST_STORE:
+      return initialState;
+    case SET_LANGUGE:
+      return {
+        ...state,
+        language: action.payload.language,
       };
     default:
       return state;

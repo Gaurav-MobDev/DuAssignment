@@ -1,1 +1,3 @@
 export const SAVE_USER_DETAILS_TYPE = 'SAVE_USER_DETAILS_TYPE';
+export const RESEST_STORE = 'RESEST_STORE';
+export const SET_LANGUGE = 'SET_LANGUGE';

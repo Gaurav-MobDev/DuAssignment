@@ -1,19 +1,30 @@
 import {
-  FETCH_MOVIES_SUCESS_TYPE,
-  MoviesActionTypes,
-  FETCH_MOVIES_FAILURE_TYPE,
+  FETCH_MOVIES_SUCCESS,
+  FETCH_MOVIES_FAILURE,
+  FETCH_MOVIES,
+  MoviesType,
+  FetchMoviesFailureActionType,
+  RESEST_STORE,
 } from './types';
 
-export const fetchMoviesSuccess = (payload: MoviesActionTypes) => {
+export const fetchMovies = () => ({
+  type: FETCH_MOVIES,
+});
+
+export const resetStore = () => ({
+  type: RESEST_STORE,
+});
+
+export const fetchMoviesSuccess = (payload: MoviesType[]) => {
   return {
-    type: FETCH_MOVIES_SUCESS_TYPE,
+    type: FETCH_MOVIES_SUCCESS,
     payload,
   };
 };
 
-export const fetchMoviesFailure = (payload: MoviesActionTypes) => {
+export const fetchMoviesFailure = (payload: FetchMoviesFailureActionType) => {
   return {
-    type: FETCH_MOVIES_FAILURE_TYPE,
+    type: FETCH_MOVIES_FAILURE,
     payload,
   };
 };

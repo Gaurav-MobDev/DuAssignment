@@ -4,4 +4,9 @@ export const TRANSLATION_STRINGS = {
   English: 'English',
   Arabic: 'إنجليزي',
   enterPassword: 'enterPassword',
+  error: 'error',
+  emailError: 'emailError',
+  passwordError: 'passwordError',
+  logout: 'logout',
+  movies: 'movies',
 };
