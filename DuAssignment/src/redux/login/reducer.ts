@@ -10,7 +10,7 @@ type LoginActionType = {
   payload: LoginPayloadType;
 };
 
-type LoginPayloadType = {
+export type LoginPayloadType = {
   isLoggedIn: boolean;
   language: string;
 };

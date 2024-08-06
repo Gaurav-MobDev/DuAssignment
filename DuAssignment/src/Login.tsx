@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -24,7 +24,9 @@ function Login() {
     emailError,
     passwordError,
   } = TRANSLATION_STRINGS;
-  let {language} = useAppSelector((state: RootState) => state.login);
+  let {language: stateLanguage} = useAppSelector(
+    (state: RootState) => state.login,
+  );
 
   const [username, setUsername] = useState('');
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
@@ -32,8 +34,11 @@ function Login() {
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [locale, setLocale] = useState(language);
+  const [locale, setLocale] = useState(stateLanguage);
 
+  useEffect(() => {
+    setLocale(stateLanguage);
+  }, [stateLanguage]);
   const changeLanguage = (language: string) => {
     i18n.locale = language;
     setLocale(language);

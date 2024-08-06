@@ -1,19 +1,16 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useAppSelector} from '../redux/hooks';
 import Login from '../Login';
 import Movies from '../Movies';
-import {RootState} from '@reduxjs/toolkit/query';
+import {RootState} from '../redux/reducers';
 import {i18n} from '../localization';
 
 function Router() {
-  const {isLoggedIn} = useAppSelector((state: RootState) => state.login);
-  let {language} = useAppSelector((state: RootState) => state.login);
+  const {isLoggedIn, language} = useAppSelector(
+    (state: RootState) => state.login,
+  );
+  i18n.locale = language;
 
-  useEffect(() => {
-    console.log({language})
-    i18n.locale = language;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   if (isLoggedIn) {
     return <Movies />;
   } else {

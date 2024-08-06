@@ -3,11 +3,16 @@ import {
   FETCH_MOVIES_FAILURE,
   MoviesAction,
   RESEST_STORE,
+  MoviesType,
 } from './types';
 
 const initialState = {
   error: '',
   movies: [],
+};
+export type MoviesState = {
+  movies: MoviesType[];
+  error: string;
 };
 
 export default function moviesReducer(

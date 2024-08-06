@@ -13,6 +13,8 @@ import {
 import rootSaga from './sagas';
 import {rootReducer} from './reducers';
 import createSensitiveStorage from 'redux-persist-sensitive-storage';
+import {MoviesState} from './movies/reducer';
+import {LoginPayloadType} from './login/reducer';
 
 export const sensitiveStorageKeys = {
   keychainService: 'du-njk13k1k3jk3j1nkj3k3kj1',
@@ -41,9 +43,11 @@ const store = configureStore({
 sagaMiddleware.run(rootSaga);
 
 export type AppStore = typeof store;
-export type RootState = ReturnType<AppStore['getState']>;
 export type AppDispatch = AppStore['dispatch'];
-
+export type RootState = {
+  login: LoginPayloadType;
+  movies: MoviesState;
+};
 const persistor = persistStore(store);
 
 export {store, persistor};
