@@ -56,9 +56,7 @@ function Movies() {
             />
           </View>
           <View style={styles.movieTitleContainer}>
-            <Text numberOfLines={2} style={styles.movieTitle}>
-              {item.title}
-            </Text>
+            <Text style={styles.movieTitle}>{item.title}</Text>
           </View>
         </View>
       </View>
@@ -90,13 +88,14 @@ function Movies() {
               <Text style={styles.logoutTitle}>{i18n.t('logout')}</Text>
             </TouchableOpacity>
           </View>
-
-          <FlatList
-            keyExtractor={item => item.id}
-            numColumns={2}
-            data={moviesList}
-            renderItem={renderItem}
-          />
+          <View style={styles.listView}>
+            <FlatList
+              keyExtractor={item => item.id}
+              numColumns={2}
+              data={moviesList}
+              renderItem={renderItem}
+            />
+          </View>
         </>
       )}
     </SafeAreaView>
@@ -106,26 +105,36 @@ function Movies() {
 const styles = StyleSheet.create({
   fullView: {
     flex: 1,
+    backgroundColor: '#fffff2',
   },
   mainTitleContainer: {flex: 4, justifyContent: 'center', alignItems: 'center'},
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#fffff2',
   },
   header: {
     flexDirection: 'row',
+    flex: 0.7,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   heading: {
     fontWeight: 'bold',
     fontSize: 24,
+    color: '#000',
   },
   renderItemView: {
-    height: 180,
+    height: 240,
     width: (SCREEN_WIDTH - 16) / 2,
     padding: 4,
+    justifyContent: 'center',
   },
-  logoutTitle: {fontSize: 12},
+  logoutTitle: {
+    fontSize: 12,
+    color: '#000',
+  },
   logoutButton: {
     flex: 1,
     justifyContent: 'center',
@@ -133,9 +142,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     marginRight: 8,
+    height: 44,
   },
   shadowView: {
-    backgroundColor: '#fff',
+    backgroundColor: '#fffff2',
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.2,
@@ -145,6 +155,7 @@ const styles = StyleSheet.create({
   },
   moviewImageContainer: {
     flex: 8,
+    padding: 4,
   },
   movieImage: {
     flex: 1,
@@ -152,10 +163,11 @@ const styles = StyleSheet.create({
   movieTitle: {
     fontWeight: '600',
     textAlign: 'center',
-    marginTop: 8,
+    color: '#000',
   },
   movieTitleContainer: {
     flex: 2,
   },
+  listView: {flex: 9},
 });
 export default Movies;

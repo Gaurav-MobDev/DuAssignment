@@ -40,6 +40,7 @@ function MyTextInput(props: MyTextInputType) {
       <Text style={labelStyle}>{label}</Text>
       <TextInput
         value={value}
+        placeholderTextColor={'#000'}
         style={textInputStyle}
         onChangeText={onChangeText}
         placeholder={placeholder}

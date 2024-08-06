@@ -5,6 +5,8 @@ import {
   TouchableOpacity,
   Text,
   SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import {MyTextInput} from './components';
 import {TRANSLATION_STRINGS} from './utils';
@@ -92,52 +94,56 @@ function Login() {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
-        <View style={styles.buttonsView}>
-          <TouchableOpacity
-            onPress={setEnglishButton}
-            style={styles.englishButton}>
-            <Text>{English}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={setArabicButton}
-            style={styles.arabicButton}>
-            <Text>{Arabic}</Text>
-          </TouchableOpacity>
+      <KeyboardAvoidingView
+        style={styles.keyboardView}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <View style={styles.container}>
+          <View style={styles.buttonsView}>
+            <TouchableOpacity
+              onPress={setEnglishButton}
+              style={styles.englishButton}>
+              <Text>{English}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={setArabicButton}
+              style={styles.arabicButton}>
+              <Text>{Arabic}</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.inputView}>
+            <MyTextInput
+              textInputStyle={[
+                styles.textInputStyle,
+                locale === 'ar' && styles.rightText,
+              ]}
+              value={username}
+              placeholder={i18n.t(enterUserName)}
+              onChangeText={updateUserName}
+              onEndEditing={checkEmailValidation}
+              error={emailErrorMessage && i18n.t(emailError)}
+              locale={locale}
+            />
+            <MyTextInput
+              textInputStyle={[
+                styles.textInputStyle,
+                locale === 'ar' && styles.rightText,
+              ]}
+              value={password}
+              placeholder={i18n.t(enterPassword)}
+              onChangeText={updatePassword}
+              onEndEditing={checkPasswordValidation}
+              error={passwordErrorMessage && i18n.t(passwordError)}
+              locale={locale}
+            />
+            <TouchableOpacity
+              disabled={checkLoginButtonDisabledOrNot()}
+              onPress={loginAction}
+              style={styles.loginButton}>
+              <Text>{i18n.t(loginScreen)}</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.inputView}>
-          <MyTextInput
-            textInputStyle={[
-              styles.textInputStyle,
-              locale === 'ar' && styles.rightText,
-            ]}
-            value={username}
-            placeholder={i18n.t(enterUserName)}
-            onChangeText={updateUserName}
-            onEndEditing={checkEmailValidation}
-            error={emailErrorMessage && i18n.t(emailError)}
-            locale={locale}
-          />
-          <MyTextInput
-            textInputStyle={[
-              styles.textInputStyle,
-              locale === 'ar' && styles.rightText,
-            ]}
-            value={password}
-            placeholder={i18n.t(enterPassword)}
-            onChangeText={updatePassword}
-            onEndEditing={checkPasswordValidation}
-            error={passwordErrorMessage && i18n.t(passwordError)}
-            locale={locale}
-          />
-          <TouchableOpacity
-            disabled={checkLoginButtonDisabledOrNot()}
-            onPress={loginAction}
-            style={styles.loginButton}>
-            <Text>{i18n.t(loginScreen)}</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
@@ -145,12 +151,17 @@ function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: 8,
+    backgroundColor: '#fffff2',
+  },
+  keyboardView: {
+    flex: 1,
+    marginHorizontal: 12,
   },
   buttonsView: {
     flexDirection: 'row',
     flex: 1,
     justifyContent: 'space-around',
+    alignItems: 'center',
   },
   rightText: {
     textAlign: 'right',
@@ -158,16 +169,18 @@ const styles = StyleSheet.create({
   englishButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1,
     height: 44,
     width: 100,
+    borderRadius: 4,
+    backgroundColor: '#55c2da',
   },
   arabicButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1,
     height: 44,
     width: 100,
+    borderRadius: 4,
+    backgroundColor: '#55c2da',
   },
   inputView: {
     flex: 5,
@@ -176,14 +189,16 @@ const styles = StyleSheet.create({
     padding: 8,
     height: 44,
     borderWidth: 1,
+    borderRadius: 4,
+    color: '#000',
   },
   loginButton: {
     height: 44,
-    borderWidth: 1,
     borderRadius: 4,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 24,
+    backgroundColor: '#55c2da',
   },
 });
 export default Login;
