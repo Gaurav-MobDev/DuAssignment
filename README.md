@@ -3,8 +3,11 @@
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 ## Step 1: Start the Metro Server
 
-First, take a clone of the project using command git clone 'https://github.com/Gaurav-MobDev/DuAssignment.git'
+First, take a clone of the project using command 
 
+```bash
+git clone 'https://github.com/Gaurav-MobDev/DuAssignment.git'
+```
 ## Step 2: Install the packages
 Now install the packages added in package.json file
 
