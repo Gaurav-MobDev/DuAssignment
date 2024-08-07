@@ -8,5 +8,5 @@ export const TRANSLATION_STRINGS = {
   emailError: 'emailError',
   passwordError: 'passwordError',
   logout: 'logout',
-  movies: 'movies',
+  moviesLabel: 'movies',
 };

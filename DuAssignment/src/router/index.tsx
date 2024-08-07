@@ -1,7 +1,7 @@
 import React from 'react';
 import {useAppSelector} from '../redux/hooks';
-import Login from '../Login';
-import Movies from '../Movies';
+import Login from '../screens/login/Login';
+import Movies from '../screens/movies/Movies';
 import {RootState} from '../redux/reducers';
 import {i18n} from '../localization';
 

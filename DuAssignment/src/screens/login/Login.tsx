@@ -1,20 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {
   View,
-  StyleSheet,
   TouchableOpacity,
   Text,
   SafeAreaView,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import {MyTextInput} from './components';
-import {TRANSLATION_STRINGS} from './utils';
-import {i18n} from './localization';
-import {useAppDispatch, useAppSelector} from './redux/hooks';
-import {saveUserDetails, setLanguage} from './redux/login/actions';
-import {validateEmail, validatePassword} from './utils/Validations';
-import {RootState} from './redux/reducers';
+import {MyTextInput} from '../../components';
+import {TRANSLATION_STRINGS} from '../../utils';
+import {i18n} from '../../localization';
+import {useAppDispatch, useAppSelector} from '../../redux/hooks';
+import {saveUserDetails, setLanguage} from '../../redux/login/actions';
+import {validateEmail, validatePassword} from '../../utils/Validations';
+import {RootState} from '../../redux/reducers';
+import {styles} from './style';
+
 function Login() {
   const dispatch = useAppDispatch();
   const {
@@ -35,7 +36,6 @@ function Login() {
   const [password, setPassword] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [locale, setLocale] = useState(stateLanguage);
 
   useEffect(() => {
@@ -148,57 +148,4 @@ function Login() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fffff2',
-  },
-  keyboardView: {
-    flex: 1,
-    marginHorizontal: 12,
-  },
-  buttonsView: {
-    flexDirection: 'row',
-    flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  rightText: {
-    textAlign: 'right',
-  },
-  englishButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 44,
-    width: 100,
-    borderRadius: 4,
-    backgroundColor: '#55c2da',
-  },
-  arabicButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 44,
-    width: 100,
-    borderRadius: 4,
-    backgroundColor: '#55c2da',
-  },
-  inputView: {
-    flex: 5,
-  },
-  textInputStyle: {
-    padding: 8,
-    height: 44,
-    borderWidth: 1,
-    borderRadius: 4,
-    color: '#000',
-  },
-  loginButton: {
-    height: 44,
-    borderRadius: 4,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 24,
-    backgroundColor: '#55c2da',
-  },
-});
 export default Login;

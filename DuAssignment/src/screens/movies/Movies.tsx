@@ -4,20 +4,21 @@ import {
   Text,
   FlatList,
   SafeAreaView,
-  StyleSheet,
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {fetchMovies, resetStore} from './redux/movies/actions';
-import {useAppDispatch, useAppSelector} from './redux/hooks';
-import {IMAGE_URL} from './utils/Endpoints';
-import {RootState} from './redux/reducers';
-import {Error} from './components/Error';
-import {SCREEN_WIDTH} from './utils/Constants';
-import {i18n} from './localization';
+import {fetchMovies, resetStore} from '../../redux/movies/actions';
+import {useAppDispatch, useAppSelector} from '../../redux/hooks';
+import {IMAGE_URL} from '../../utils/Endpoints';
+import {RootState} from '../../redux/reducers';
+import {Error} from '../../components/Error';
+import {i18n} from '../../localization';
+import {styles} from './styles';
+import {Colors, TRANSLATION_STRINGS} from '../../utils';
 
 function Movies() {
+  const {moviesLabel, logout} = TRANSLATION_STRINGS;
   let dispatch = useAppDispatch();
   let {movies, error, loading} = useAppSelector(
     (state: RootState) => state.movies,
@@ -64,7 +65,7 @@ function Movies() {
   if (loading) {
     return (
       <SafeAreaView style={styles.container}>
-        <ActivityIndicator size={'large'} color={'#000'} />
+        <ActivityIndicator size={'large'} color={Colors.black} />
       </SafeAreaView>
     );
   }
@@ -79,12 +80,12 @@ function Movies() {
           <View style={styles.header}>
             <View style={styles.fullView} />
             <View style={styles.mainTitleContainer}>
-              <Text style={styles.heading}>{i18n.t('movies')}</Text>
+              <Text style={styles.heading}>{i18n.t(moviesLabel)}</Text>
             </View>
             <TouchableOpacity
               onPress={logoutAction}
               style={styles.logoutButton}>
-              <Text style={styles.logoutTitle}>{i18n.t('logout')}</Text>
+              <Text style={styles.logoutTitle}>{i18n.t(logout)}</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.listView}>
@@ -101,72 +102,4 @@ function Movies() {
   );
 }
 
-const styles = StyleSheet.create({
-  fullView: {
-    flex: 1,
-    backgroundColor: '#fffff2',
-  },
-  mainTitleContainer: {flex: 4, justifyContent: 'center', alignItems: 'center'},
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fffff2',
-  },
-  header: {
-    flexDirection: 'row',
-    flex: 0.7,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  heading: {
-    fontWeight: 'bold',
-    fontSize: 24,
-    color: '#000',
-  },
-  renderItemView: {
-    height: 240,
-    width: (SCREEN_WIDTH - 16) / 2,
-    padding: 4,
-    justifyContent: 'center',
-  },
-  logoutTitle: {
-    fontSize: 12,
-    color: '#000',
-  },
-  logoutButton: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderRadius: 4,
-    marginRight: 8,
-    height: 44,
-  },
-  shadowView: {
-    backgroundColor: '#fffff2',
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 3,
-    flex: 1,
-  },
-  moviewImageContainer: {
-    flex: 8,
-    padding: 4,
-  },
-  movieImage: {
-    flex: 1,
-  },
-  movieTitle: {
-    fontWeight: '600',
-    textAlign: 'center',
-    color: '#000',
-  },
-  movieTitleContainer: {
-    flex: 2,
-  },
-  listView: {flex: 9},
-});
 export default Movies;
