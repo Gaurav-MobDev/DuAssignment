@@ -77,7 +77,7 @@ i18n-js for multilingual support
 react-native-localize to get the locale(local language)
 redux-persist-sensitive-storage to store the sensitive/confidential data
 redux for state management
-redux-persist to store data when the app in not running
+redux-persist to store data when the app is not running or in killed state
 redux-saga is a middleware used with redux to perform async tasks
 react-native-fast-image to handle the performance of flatlist with high-resolution images
 @reduxjs/toolkit used iin conjuction with redux library
