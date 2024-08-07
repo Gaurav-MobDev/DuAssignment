@@ -90,7 +90,7 @@ This mobile application is designed to let users see popular movies list. The ap
 Key Features:
 User Authentication:
 
-Sign In: Users can log in securely with their credentials. For security purpose the credentials are not store in the app but just the login state and to store the data Keychain in iOS and Keystore in android is used by react-native-senstive-storage library.
+Sign In: Users can log in securely with their credentials. For security reasons the credentials are not stored in the app but just the login state and to store the data Keychain in iOS and Keystore in android is used by react-native-senstive-storage library.
 There is a proper validation for both the Email and Password. The login button is disabled until both the Email and Password are validated.
 
 Popular Movies List:
