@@ -8,7 +8,6 @@ i18n.translations = {
   en,
   ar,
 };
-//i18n.locale = getLocales()[0].languageCode;
 
 I18nManager.forceRTL(i18n.locale === 'ar');
 

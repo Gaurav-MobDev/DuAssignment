@@ -19,19 +19,6 @@ export type MoviesType = {
   vote_average: number;
   vote_count: number;
 };
-export interface FetchMoviesRequestAction {
-  type: typeof FETCH_MOVIES;
-}
-
-interface FetchMoviesSuccessAction {
-  type: typeof FETCH_MOVIES_SUCCESS;
-  payload: {movies: MoviesType[]};
-}
-
-interface FetchMoviesFailureAction {
-  type: typeof FETCH_MOVIES_FAILURE;
-  error: string;
-}
 
 export type MoviesAction =
   | {type: typeof FETCH_MOVIES}
@@ -39,6 +26,7 @@ export type MoviesAction =
   | {type: typeof RESEST_STORE}
   | {type: typeof FETCH_MOVIES_FAILURE; payload: string};
 
-export type FetchMoviesRequestActionType = FetchMoviesRequestAction;
-export type FetchMoviesSuccessActionType = FetchMoviesSuccessAction;
-export type FetchMoviesFailureActionType = FetchMoviesFailureAction;
+export type FetchMoviesFailureActionType = {
+  type: typeof FETCH_MOVIES_FAILURE;
+  error: string;
+};

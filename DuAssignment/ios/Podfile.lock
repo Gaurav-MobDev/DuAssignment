@@ -947,7 +947,7 @@ PODS:
   - React-Mapbuffer (0.74.4):
     - glog
     - React-debug
-  - react-native-sensitive-info (5.5.1):
+  - react-native-sensitive-info (5.5.8):
     - React
   - React-nativeconfig (0.74.4)
   - React-NativeModulesApple (0.74.4):
@@ -1410,7 +1410,7 @@ SPEC CHECKSUMS:
   React-jsitracing: 4e9c99e73a6269b27b0d4cbab277dd90df3e5ac0
   React-logger: fbfb50e2a2b1b46ee087f0a52739fadecc5e81a4
   React-Mapbuffer: d39610dff659d8cf1fea485abae08bbf6f9c8279
-  react-native-sensitive-info: e05877777e50e8112b8728f69eab407c3dcf38ab
+  react-native-sensitive-info: 400c6e3d27945e15c8cddb5b4b92233c85ee06f8
   React-nativeconfig: 2be4363c2c4ac2b42419577774e83e4e4fd2af9f
   React-NativeModulesApple: 453ada38f826a508e48872c7a7877c431af48bba
   React-perflogger: 9745f800ab4d12ec4325bde7bd090eafb87c5570
