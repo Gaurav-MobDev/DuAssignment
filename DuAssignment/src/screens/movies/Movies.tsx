@@ -7,8 +7,6 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import NetInfo, {NetInfoState} from '@react-native-community/netinfo';
-
 import FastImage from 'react-native-fast-image';
 import {fetchMovies, resetStore} from '../../redux/movies/actions';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
@@ -19,9 +17,11 @@ import {i18n} from '../../localization';
 import {styles} from './styles';
 import {Colors, showLogoutAlert, TRANSLATION_STRINGS} from '../../utils';
 import {okAlert as showAlert} from '../../utils';
+import useNetworkStatus from '../../hooks/netinfoHook';
 
 function Movies() {
   const {moviesLabel, logout} = TRANSLATION_STRINGS;
+  const isConnected = useNetworkStatus();
 
   let dispatch = useAppDispatch();
 
@@ -30,16 +30,6 @@ function Movies() {
   );
 
   const [moviesList, setMoviesList] = useState([]);
-  const [isConnected, setIsConnected] = useState<boolean>(true);
-
-  useEffect(() => {
-    const handleConnectivityChange = (state: NetInfoState) => {
-      setIsConnected(state.isConnected ?? false);
-    };
-    NetInfo.fetch().then(handleConnectivityChange);
-    const unsubscribe = NetInfo.addEventListener(handleConnectivityChange);
-    return () => unsubscribe();
-  }, []);
 
   useEffect(() => {
     dispatch(fetchMovies());
