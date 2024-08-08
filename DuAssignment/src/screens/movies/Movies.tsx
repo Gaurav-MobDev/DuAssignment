@@ -15,7 +15,7 @@ import {RootState} from '../../redux/reducers';
 import {Error} from '../../components/Error';
 import {i18n} from '../../localization';
 import {styles} from './styles';
-import {Colors, TRANSLATION_STRINGS} from '../../utils';
+import {Colors, showLogoutAlert, TRANSLATION_STRINGS} from '../../utils';
 
 function Movies() {
   const {moviesLabel, logout} = TRANSLATION_STRINGS;
@@ -38,18 +38,23 @@ function Movies() {
   }, [movies]);
 
   const logoutAction = () => {
+    showLogoutAlert(resetState);
+  };
+
+  const resetState = () => {
     dispatch(resetStore());
   };
+
   const renderItem = ({item}: {item: any}) => {
     return (
       <View style={styles.renderItemView}>
         <View style={styles.shadowView}>
           <View style={styles.moviewImageContainer}>
             <FastImage
+              defaultSource={require('../../../assets/images/avatar.webp')}
               style={styles.movieImage}
               source={{
                 uri: `${IMAGE_URL}${item.poster_path}`,
-                headers: {Authorization: 'someAuthToken'},
                 priority: FastImage.priority.normal,
               }}
               resizeMode={FastImage.resizeMode.contain}

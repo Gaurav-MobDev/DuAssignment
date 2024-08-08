@@ -8,6 +8,7 @@ import {
   StyleProp,
   TextStyle,
 } from 'react-native';
+import {Colors} from '../utils';
 
 type MyTextInputType = {
   label?: string;
@@ -18,9 +19,10 @@ type MyTextInputType = {
   ) => void;
   value: string;
   labelStyle?: object;
-  textInputStyle: StyleProp<TextStyle>;
+  textInputStyle?: StyleProp<TextStyle>;
   error?: string;
   locale?: string;
+  maxLength?: number;
 };
 
 function MyTextInput(props: MyTextInputType) {
@@ -34,14 +36,20 @@ function MyTextInput(props: MyTextInputType) {
     onEndEditing,
     error,
     locale,
+    maxLength,
   } = props;
   return (
     <>
       <Text style={labelStyle}>{label}</Text>
       <TextInput
+        maxLength={maxLength}
         value={value}
-        placeholderTextColor={'#000'}
-        style={textInputStyle}
+        placeholderTextColor={Colors.black}
+        style={[
+          textInputStyle,
+          styles.defaultTextInputStyle,
+          error ? styles.errorBorder : styles.border,
+        ]}
         onChangeText={onChangeText}
         placeholder={placeholder}
         onEndEditing={onEndEditing}
@@ -59,6 +67,19 @@ const styles = StyleSheet.create({
   errorLabel: {
     color: 'red',
     textAlign: 'left',
+  },
+  errorBorder: {
+    borderColor: Colors.red,
+  },
+  border: {
+    borderColor: Colors.black,
+  },
+  defaultTextInputStyle: {
+    padding: 8,
+    height: 44,
+    borderWidth: 1,
+    borderRadius: 4,
+    color: Colors.black,
   },
   rightText: {
     textAlign: 'right',

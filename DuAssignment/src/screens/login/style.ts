@@ -7,6 +7,16 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: offWhite,
   },
+  loginTitleView: {
+    flex: 0.6,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loginTitle: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    color: black,
+  },
   keyboardView: {
     flex: 1,
     marginHorizontal: 12,
@@ -39,19 +49,7 @@ export const styles = StyleSheet.create({
   inputView: {
     flex: 5,
   },
-  textInputStyle: {
-    padding: 8,
-    height: 44,
-    borderWidth: 1,
-    borderRadius: 4,
-    color: black,
-  },
   loginButton: {
-    height: 44,
-    borderRadius: 4,
-    justifyContent: 'center',
-    alignItems: 'center',
     marginTop: 24,
-    backgroundColor: lightBlue,
   },
 });

@@ -2,7 +2,7 @@ import {call, put, takeLatest} from 'redux-saga/effects';
 import {FETCH_MOVIES} from './types';
 import {fetchMoviesFailure, fetchMoviesSuccess} from './actions';
 import {MOVIES_URL} from '../../utils/Endpoints';
-
+import {fetchWithTimeout} from '../../network/fetchHelper';
 function* fetchMovies(): Generator<any, void, any> {
   try {
     const token =
@@ -14,11 +14,16 @@ function* fetchMovies(): Generator<any, void, any> {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = yield call(fetch, `${MOVIES_URL}`, options);
+    const response = yield call(
+      fetchWithTimeout,
+      `${MOVIES_URL}`,
+      options,
+      8000,
+    );
     const data = yield response.json();
-    yield put(fetchMoviesSuccess(data?.results));
+    yield put(fetchMoviesSuccess([...data?.results]));
   } catch (e) {
-    yield put(fetchMoviesFailure(e as any));
+    yield put(fetchMoviesFailure(`${e}` as any));
   }
 }
 

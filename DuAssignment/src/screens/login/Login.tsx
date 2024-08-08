@@ -7,7 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import {MyTextInput} from '../../components';
+import {MyTextInput, Button} from '../../components';
 import {TRANSLATION_STRINGS} from '../../utils';
 import {i18n} from '../../localization';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
@@ -35,12 +35,12 @@ function Login() {
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [password, setPassword] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
-
   const [locale, setLocale] = useState(stateLanguage);
 
   useEffect(() => {
     setLocale(stateLanguage);
   }, [stateLanguage]);
+
   const changeLanguage = (language: string) => {
     i18n.locale = language;
     setLocale(language);
@@ -56,6 +56,7 @@ function Login() {
   };
   const updateUserName = (value: string) => {
     setUsername(value);
+    checkEmailValidation();
   };
 
   const checkEmailValidation = () => {
@@ -78,6 +79,7 @@ function Login() {
 
   const updatePassword = (value: string) => {
     setPassword(value);
+    checkPasswordValidation();
   };
 
   const loginAction = () => {
@@ -98,6 +100,9 @@ function Login() {
         style={styles.keyboardView}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <View style={styles.container}>
+          <View style={styles.loginTitleView}>
+            <Text style={styles.loginTitle}>{i18n.t(loginScreen)}</Text>
+          </View>
           <View style={styles.buttonsView}>
             <TouchableOpacity
               onPress={setEnglishButton}
@@ -112,10 +117,7 @@ function Login() {
           </View>
           <View style={styles.inputView}>
             <MyTextInput
-              textInputStyle={[
-                styles.textInputStyle,
-                locale === 'ar' && styles.rightText,
-              ]}
+              textInputStyle={[locale === 'ar' && styles.rightText]}
               value={username}
               placeholder={i18n.t(enterUserName)}
               onChangeText={updateUserName}
@@ -124,10 +126,8 @@ function Login() {
               locale={locale}
             />
             <MyTextInput
-              textInputStyle={[
-                styles.textInputStyle,
-                locale === 'ar' && styles.rightText,
-              ]}
+              maxLength={15}
+              textInputStyle={[locale === 'ar' && styles.rightText]}
               value={password}
               placeholder={i18n.t(enterPassword)}
               onChangeText={updatePassword}
@@ -135,12 +135,12 @@ function Login() {
               error={passwordErrorMessage && i18n.t(passwordError)}
               locale={locale}
             />
-            <TouchableOpacity
+            <Button
               disabled={checkLoginButtonDisabledOrNot()}
               onPress={loginAction}
-              style={styles.loginButton}>
-              <Text>{i18n.t(loginScreen)}</Text>
-            </TouchableOpacity>
+              label={i18n.t(loginScreen)}
+              style={styles.loginButton}
+            />
           </View>
         </View>
       </KeyboardAvoidingView>

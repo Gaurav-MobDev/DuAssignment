@@ -1,11 +1,15 @@
 {
     "language": "English",
-    "loginScreen": "Login Screen",
+    "loginScreen": "Login",
     "enterUserName": "Enter Username",
     "enterPassword": "Enter Password",
-    "emailError": "Please enter a valid email",
+    "emailError": "Please enter a valid email or username",
     "passwordError":
     "Password should have 8-15 characters(Alpha number with 1 capital and 1 special character",
      "movies": "MOVIES",
-     "logout": "LOGOUT"
+     "logout": "LOGOUT",
+     "noInternet": "No Internet connection",
+     "logoutAlert": "Are you sure you want to logout?",
+     "cancel": "Cancel",
+     "ok": "OK"
 }
