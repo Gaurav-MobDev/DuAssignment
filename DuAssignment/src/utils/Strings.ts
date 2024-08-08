@@ -14,4 +14,5 @@ export const TRANSLATION_STRINGS = {
   logoutAlert: 'logoutAlert',
   cancel: 'cancel',
   ok: 'ok',
+  moviesAPIError: 'Error fetching movies:',
 };

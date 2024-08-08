@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 14,
     textAlign: 'center',
+    color: Colors.black,
   },
   disableColor: {
     backgroundColor: Colors.extraLightBlue,

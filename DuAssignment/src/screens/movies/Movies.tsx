@@ -33,9 +33,11 @@ function Movies() {
   const [isConnected, setIsConnected] = useState<boolean>(true);
 
   useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener((state: NetInfoState) => {
+    const handleConnectivityChange = (state: NetInfoState) => {
       setIsConnected(state.isConnected ?? false);
-    });
+    };
+    NetInfo.fetch().then(handleConnectivityChange);
+    const unsubscribe = NetInfo.addEventListener(handleConnectivityChange);
     return () => unsubscribe();
   }, []);
 

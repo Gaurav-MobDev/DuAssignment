@@ -2,25 +2,11 @@ import {call, put, takeLatest} from 'redux-saga/effects';
 import {FETCH_MOVIES} from './types';
 import {fetchMoviesFailure, fetchMoviesSuccess} from './actions';
 import {MOVIES_URL} from '../../utils/Endpoints';
-import {fetchWithTimeout} from '../../network/fetchHelper';
+import {fetchMoviesAPI} from '../../network/fetchHelper';
 function* fetchMovies(): Generator<any, void, any> {
   try {
-    const token =
-      'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNmI1MGM3OWEyYWEzYTgwY2Q4OTM2NWRiM2JhODUxNSIsIm5iZiI6MTcyMjkzMzIxOS44Nzc2NjEsInN1YiI6IjY2YjFkZTMyYzJkOGUwZWRhYTk5YTg0YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Vb9ed_m6NkvkzCmZte1aTkTMQZRytPfr6Nj4nt68r-0';
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    const response = yield call(
-      fetchWithTimeout,
-      `${MOVIES_URL}`,
-      options,
-      8000,
-    );
-    const data = yield response.json();
+    const response = yield call(fetchMoviesAPI, `${MOVIES_URL}`);
+    const data = yield response;
     yield put(fetchMoviesSuccess([...data?.results]));
   } catch (e) {
     yield put(fetchMoviesFailure(`${e}` as any));

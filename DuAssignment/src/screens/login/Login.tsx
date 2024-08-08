@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
   View,
-  TouchableOpacity,
   Text,
   SafeAreaView,
   KeyboardAvoidingView,
@@ -104,16 +103,16 @@ function Login() {
             <Text style={styles.loginTitle}>{i18n.t(loginScreen)}</Text>
           </View>
           <View style={styles.buttonsView}>
-            <TouchableOpacity
+            <Button
               onPress={setEnglishButton}
-              style={styles.englishButton}>
-              <Text>{English}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+              label={English}
+              style={styles.englishButton}
+            />
+            <Button
+              label={Arabic}
               onPress={setArabicButton}
-              style={styles.arabicButton}>
-              <Text>{Arabic}</Text>
-            </TouchableOpacity>
+              style={styles.arabicButton}
+            />
           </View>
           <View style={styles.inputView}>
             <MyTextInput
