@@ -95,33 +95,26 @@ function Movies() {
   }
   return (
     <SafeAreaView style={styles.container}>
-      {error ? (
-        <>
-          <Error error={error} />
-        </>
-      ) : (
-        <>
-          <View style={styles.header}>
-            <View style={styles.fullView} />
-            <View style={styles.mainTitleContainer}>
-              <Text style={styles.heading}>{i18n.t(moviesLabel)}</Text>
-            </View>
-            <TouchableOpacity
-              onPress={logoutAction}
-              style={styles.logoutButton}>
-              <Text style={styles.logoutTitle}>{i18n.t(logout)}</Text>
-            </TouchableOpacity>
+      <>
+        <View style={styles.header}>
+          <View style={styles.fullView} />
+          <View style={styles.mainTitleContainer}>
+            <Text style={styles.heading}>{i18n.t(moviesLabel)}</Text>
           </View>
-          <View style={styles.listView}>
-            <FlatList
-              keyExtractor={item => item.id}
-              numColumns={2}
-              data={moviesList}
-              renderItem={renderItem}
-            />
-          </View>
-        </>
-      )}
+          <TouchableOpacity onPress={logoutAction} style={styles.logoutButton}>
+            <Text style={styles.logoutTitle}>{i18n.t(logout)}</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.listView}>
+          {error && <Error error={error} />}
+          <FlatList
+            keyExtractor={item => item.id}
+            numColumns={2}
+            data={moviesList}
+            renderItem={renderItem}
+          />
+        </View>
+      </>
     </SafeAreaView>
   );
 }
