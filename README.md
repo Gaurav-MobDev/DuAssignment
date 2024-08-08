@@ -1,6 +1,7 @@
 # Getting Started
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Screenshots have been added at root in screenshots folder.
 ## Step 1: Start the Metro Server
 
 First, take a clone of the project using command 
