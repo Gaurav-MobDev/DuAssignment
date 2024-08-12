@@ -3,6 +3,7 @@ import {SCREEN_WIDTH} from '../../utils/Constants';
 import {Colors} from '../../utils';
 
 const {offWhite, black} = Colors;
+export const ITEM_HEIGHT = 240;
 export const styles = StyleSheet.create({
   fullView: {
     flex: 1,

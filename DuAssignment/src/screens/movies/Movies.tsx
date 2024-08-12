@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -14,7 +14,7 @@ import {IMAGE_URL} from '../../utils/Endpoints';
 import {RootState} from '../../redux/reducers';
 import {Error} from '../../components/Error';
 import {i18n} from '../../localization';
-import {styles} from './styles';
+import {styles, ITEM_HEIGHT} from './styles';
 import {Colors, showLogoutAlert, TRANSLATION_STRINGS} from '../../utils';
 import {okAlert as showAlert} from '../../utils';
 import useNetworkStatus from '../../hooks/netinfoHook';
@@ -78,7 +78,7 @@ function Movies() {
     setRefreshing(false);
   };
 
-  const renderItem = ({item}: {item: any}) => {
+  const renderItem = useCallback(({item}: {item: any}) => {
     return (
       <View style={styles.renderItemView}>
         <View style={styles.shadowView}>
@@ -99,7 +99,12 @@ function Movies() {
         </View>
       </View>
     );
-  };
+  }, []);
+  const getItemLayout = (data: any, index: number) => ({
+    length: ITEM_HEIGHT,
+    offset: ITEM_HEIGHT * index,
+    index,
+  });
   const footer = () => {
     if (!loading) {
       return null;
@@ -135,6 +140,7 @@ function Movies() {
             onEndReachedThreshold={0.2}
             refreshing={refreshing}
             onRefresh={onRefresh}
+            getItemLayout={getItemLayout}
             ListFooterComponent={footer}
           />
         </View>
