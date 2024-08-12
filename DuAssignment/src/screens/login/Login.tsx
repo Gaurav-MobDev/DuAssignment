@@ -133,6 +133,7 @@ function Login() {
               onEndEditing={checkPasswordValidation}
               error={passwordErrorMessage && i18n.t(passwordError)}
               locale={locale}
+              secureTextEntry={true}
             />
             <Button
               disabled={checkLoginButtonDisabledOrNot()}

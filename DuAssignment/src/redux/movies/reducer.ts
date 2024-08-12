@@ -11,11 +11,15 @@ const initialState = {
   error: '',
   loading: false,
   movies: [],
+  page: 0,
+  totalPagesCount: 45502,
 };
 export type MoviesState = {
   movies: MoviesType[];
   error: string;
   loading: boolean;
+  page: number;
+  totalPagesCount: number;
 };
 
 export default function moviesReducer(
@@ -27,11 +31,12 @@ export default function moviesReducer(
       return {
         ...state,
         loading: true,
+        page: action.payload,
       };
     case FETCH_MOVIES_SUCCESS:
       return {
         ...state,
-        movies: action.payload,
+        movies: [...state.movies, ...action.payload],
         error: '',
         loading: false,
       };

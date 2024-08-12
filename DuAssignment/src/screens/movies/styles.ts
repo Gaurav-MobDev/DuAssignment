@@ -70,4 +70,7 @@ export const styles = StyleSheet.create({
     flex: 2,
   },
   listView: {flex: 9},
+  footer: {
+    margin: 15,
+  },
 });

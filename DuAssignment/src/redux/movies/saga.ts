@@ -3,9 +3,12 @@ import {FETCH_MOVIES} from './types';
 import {fetchMoviesFailure, fetchMoviesSuccess} from './actions';
 import {MOVIES_URL} from '../../utils/Endpoints';
 import {fetchMoviesAPI} from '../../network/fetchHelper';
-function* fetchMovies(): Generator<any, void, any> {
+function* fetchMovies(action: any): Generator<any, void, any> {
   try {
-    const response = yield call(fetchMoviesAPI, `${MOVIES_URL}`);
+    const response = yield call(
+      fetchMoviesAPI,
+      `${MOVIES_URL}?language=en-US&page=${action.payload}`,
+    );
     const data = yield response;
     yield put(fetchMoviesSuccess([...data?.results]));
   } catch (e) {

@@ -23,6 +23,7 @@ type MyTextInputType = {
   error?: string;
   locale?: string;
   maxLength?: number;
+  secureTextEntry?: boolean;
 };
 
 function MyTextInput(props: MyTextInputType) {
@@ -37,11 +38,13 @@ function MyTextInput(props: MyTextInputType) {
     error,
     locale,
     maxLength,
+    secureTextEntry,
   } = props;
   return (
     <>
       <Text style={labelStyle}>{label}</Text>
       <TextInput
+        secureTextEntry={secureTextEntry}
         maxLength={maxLength}
         value={value}
         placeholderTextColor={Colors.black}

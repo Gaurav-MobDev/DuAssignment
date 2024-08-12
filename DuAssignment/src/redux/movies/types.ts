@@ -21,7 +21,7 @@ export type MoviesType = {
 };
 
 export type MoviesAction =
-  | {type: typeof FETCH_MOVIES}
+  | {type: typeof FETCH_MOVIES; payload: number}
   | {type: typeof FETCH_MOVIES_SUCCESS; payload: MoviesType[]}
   | {type: typeof RESEST_STORE}
   | {type: typeof FETCH_MOVIES_FAILURE; payload: string};

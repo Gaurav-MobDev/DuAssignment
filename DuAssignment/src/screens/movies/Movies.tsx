@@ -18,6 +18,7 @@ import {styles} from './styles';
 import {Colors, showLogoutAlert, TRANSLATION_STRINGS} from '../../utils';
 import {okAlert as showAlert} from '../../utils';
 import useNetworkStatus from '../../hooks/netinfoHook';
+import {MOVIES_PLACEHOLDER} from '../../utils/Images';
 
 function Movies() {
   const {moviesLabel, logout} = TRANSLATION_STRINGS;
@@ -25,16 +26,19 @@ function Movies() {
 
   let dispatch = useAppDispatch();
 
-  let {movies, error, loading} = useAppSelector(
+  let {movies, error, loading, totalPagesCount} = useAppSelector(
     (state: RootState) => state.movies,
   );
 
   const [moviesList, setMoviesList] = useState([]);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [refreshing, setRefreshing] = useState(false);
+  const [totalPages, setTotalPages] = useState(45502);
 
   useEffect(() => {
-    dispatch(fetchMovies());
+    dispatch(fetchMovies(pageNumber));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [pageNumber]);
 
   useEffect(() => {
     if (movies?.length > 0) {
@@ -48,6 +52,11 @@ function Movies() {
     }
   }, [isConnected]);
 
+  useEffect(() => {
+    setTotalPages(totalPagesCount);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const logoutAction = () => {
     showLogoutAlert(resetState);
   };
@@ -56,13 +65,26 @@ function Movies() {
     dispatch(resetStore());
   };
 
+  const handleLoadMore = () => {
+    if (!loading && pageNumber < totalPages) {
+      setPageNumber(prevPage => prevPage + 1);
+    }
+  };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    setPageNumber(1);
+    setMoviesList([]);
+    setRefreshing(false);
+  };
+
   const renderItem = ({item}: {item: any}) => {
     return (
       <View style={styles.renderItemView}>
         <View style={styles.shadowView}>
           <View style={styles.moviewImageContainer}>
             <FastImage
-              defaultSource={require('../../../assets/images/avatar.webp')}
+              defaultSource={MOVIES_PLACEHOLDER}
               style={styles.movieImage}
               source={{
                 uri: `${IMAGE_URL}${item.poster_path}`,
@@ -78,13 +100,18 @@ function Movies() {
       </View>
     );
   };
-  if (loading) {
+  const footer = () => {
+    if (!loading) {
+      return null;
+    }
     return (
-      <SafeAreaView style={styles.container}>
-        <ActivityIndicator size={'large'} color={Colors.black} />
-      </SafeAreaView>
+      <ActivityIndicator
+        size={'large'}
+        color={Colors.black}
+        style={styles.footer}
+      />
     );
-  }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <>
@@ -100,10 +127,15 @@ function Movies() {
         <View style={styles.listView}>
           {error && <Error error={error} />}
           <FlatList
-            keyExtractor={item => item.id}
+            keyExtractor={(item, index) => `${item.id}-${index}`}
             numColumns={2}
             data={moviesList}
             renderItem={renderItem}
+            onEndReached={handleLoadMore}
+            onEndReachedThreshold={0.2}
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            ListFooterComponent={footer}
           />
         </View>
       </>

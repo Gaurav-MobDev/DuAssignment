@@ -7,8 +7,9 @@ import {
   RESEST_STORE,
 } from './types';
 
-export const fetchMovies = () => ({
+export const fetchMovies = (page: number) => ({
   type: FETCH_MOVIES,
+  payload: page,
 });
 
 export const resetStore = () => ({

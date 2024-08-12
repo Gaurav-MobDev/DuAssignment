@@ -34,6 +34,9 @@ const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
+      immutableCheck: {
+        warnAfter: 120,
+      },
       serializableCheck: {
         ignoredActions: [FLUSH, REGISTER, REHYDRATE, PAUSE, PURGE, PERSIST],
       },
